@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="pocketbookimporter" default="all">
+  
+  
+  <property file="pocketbookimporter.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.tox/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.zip"/>
+    <include name="*.apk"/>
+    <include name="*.war"/>
+    <include name="*.egg"/>
+    <include name="*.ear"/>
+    <include name="*.ane"/>
+    <include name="*.swc"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.7" value="${jdk.home.1.7}/bin"/>
+  <path id="jdk.classpath.1.7">
+    <fileset dir="${jdk.home.1.7}">
+      <include name="lib/ant-javafx.jar"/>
+      <include name="lib/dt.jar"/>
+      <include name="lib/javafx-doclet.jar"/>
+      <include name="lib/javafx-mx.jar"/>
+      <include name="lib/jconsole.jar"/>
+      <include name="lib/sa-jdi.jar"/>
+      <include name="lib/tools.jar"/>
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/htmlconverter.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxrt.jar"/>
+      <include name="jre/lib/JObjC.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.7}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.7}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.7"/>
+  <property name="lib.dir" value="${basedir}/../../Projects/PocketBookImport"/>
+
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.selenium-server-standalone-2.48.2.classpath">
+    <pathelement location="${basedir}/../../Projects/PocketBookImport/joda-time-2.9.jar"/>
+    <pathelement location="${basedir}/../../Projects/PocketBookImport/selenium-server-standalone-2.48.2.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module PocketBookImporter -->
+  
+  <dirname property="module.pocketbookimporter.basedir" file="${ant.file}"/>
+  <property name="main-class" value="com/company/Main"/>
+  <property name="src.dir" value="${module.pocketbookimporter.basedir}/src"/>
+
+  <property name="module.jdk.home.pocketbookimporter" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.pocketbookimporter" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.pocketbookimporter" value="${project.jdk.classpath}"/>
+
+  <property name="compiler.args.pocketbookimporter" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
+
+  <property name="pocketbookimporter.output.dir" value="${module.pocketbookimporter.basedir}/out/production/PocketBookImporter"/>
+  <property name="pocketbookimporter.jar.dir" value="${module.pocketbookimporter.basedir}/out/jar"/>
+  <property name="pocketbookimporter.testoutput.dir" value="${module.pocketbookimporter.basedir}/out/test/PocketBookImporter"/>
+
+  <path id="pocketbookimporter.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+
+  </path>
+
+
+  <path id="pocketbookimporter.module.production.classpath">
+    <path refid="${module.jdk.classpath.pocketbookimporter}"/>
+    <path refid="library.selenium-server-standalone-2.48.2.classpath"/>
+  </path>
+  
+  <path id="pocketbookimporter.runtime.production.module.classpath">
+    <pathelement location="${pocketbookimporter.output.dir}"/>
+    <path refid="library.selenium-server-standalone-2.48.2.classpath"/>
+  </path>
+  
+  <path id="pocketbookimporter.module.classpath">
+    <path refid="${module.jdk.classpath.pocketbookimporter}"/>
+    <pathelement location="${pocketbookimporter.output.dir}"/>
+    <path refid="library.selenium-server-standalone-2.48.2.classpath"/>
+  </path>
+  
+  <path id="pocketbookimporter.runtime.module.classpath">
+    <pathelement location="${pocketbookimporter.testoutput.dir}"/>
+    <pathelement location="${pocketbookimporter.output.dir}"/>
+    <path refid="library.selenium-server-standalone-2.48.2.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.pocketbookimporter">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.pocketbookimporter">
+    <patternset refid="excluded.from.module.pocketbookimporter"/>
+  </patternset>
+  
+  <path id="pocketbookimporter.module.sourcepath">
+    <dirset dir="${module.pocketbookimporter.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.pocketbookimporter" depends="compile.module.pocketbookimporter.production,compile.module.pocketbookimporter.tests" description="Compile module PocketBookImporter"/>
+  
+  <target name="compile.module.pocketbookimporter.production" depends="register.custom.compilers" description="Compile module PocketBookImporter; production classes">
+    <mkdir dir="${pocketbookimporter.output.dir}"/>
+    <javac2 destdir="${pocketbookimporter.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.pocketbookimporter}/javac">
+      <compilerarg line="${compiler.args.pocketbookimporter}"/>
+      <bootclasspath refid="pocketbookimporter.module.bootclasspath"/>
+      <classpath refid="pocketbookimporter.module.production.classpath"/>
+      <src refid="pocketbookimporter.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.pocketbookimporter"/>
+    </javac2>
+    
+    <copy todir="${pocketbookimporter.output.dir}">
+      <fileset dir="${module.pocketbookimporter.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.pocketbookimporter.tests" depends="register.custom.compilers,compile.module.pocketbookimporter.production" description="compile module PocketBookImporter; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.pocketbookimporter" description="cleanup module">
+    <delete dir="${pocketbookimporter.output.dir}"/>
+    <delete dir="${pocketbookimporter.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.pocketbookimporter" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.pocketbookimporter" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+  <target name="jar" depends="all">
+    <mkdir dir="${pocketbookimporter.jar.dir}"/>
+    <jar destfile="${pocketbookimporter.jar.dir}/${ant.project.name}.jar" basedir="${pocketbookimporter.output.dir}" excludes="**/*.jar">
+      <manifest>
+        <attribute name="Main-Class" value="${main-class}"/>
+      </manifest>
+      <zipgroupfileset dir="${lib.dir}" includes="**/*.jar" />
+    </jar>
+  </target>
+
+</project>
