@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.File;
+import java.util.List;
+
 public class PageAction extends Navigation {
     WebDriver driver;
 
@@ -36,4 +39,12 @@ public class PageAction extends Navigation {
         return select;
     }
 
+    public void uploadFiles(String cleanTransactionsFolder, WebElement fileInput) {
+        TransactionsManager transactionsManager = new TransactionsManager();
+        List<File> filesToBeUploaded = transactionsManager.getAllFilesIn(cleanTransactionsFolder);
+
+        for (File file : filesToBeUploaded) {
+            fileInput.sendKeys(file.getPath());
+        }
+    }
 }

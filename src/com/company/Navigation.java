@@ -44,4 +44,18 @@ public class Navigation {
         goTo("https://getpocketbook.com/settings");
         return new SettingPage(driver);
     }
+
+    public LoginPageForPocketSmith loginPageForPocketSmith() {
+        goTo("https://my.pocketsmith.com/login");
+        return new LoginPageForPocketSmith(driver);
+    }
+
+    public UploadPageForPocketSmith uploadPageForPocketSmith() {
+        goTo("https://my.pocketsmith.com/upload");
+        return new UploadPageForPocketSmith(driver);
+    }
+
+    public void logoutPageForPocketBook() {
+        goTo("https://getpocketbook.com/signout");
+    }
 }

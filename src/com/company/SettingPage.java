@@ -38,14 +38,8 @@ public class SettingPage extends PageAction {
     }
 
     private void selectFilesToUpload(String cleanTransactionsFolder) {
-        TransactionsManager transactionsManager = new TransactionsManager();
-        List<File> filesToBeUploaded = transactionsManager.getAllFilesIn(cleanTransactionsFolder);
-
-        WebElement fileInput = findByXPath("//*[@id=\"uploadifive-file_upload\"]/input[2]");
-
-        for (File file : filesToBeUploaded) {
-            fileInput.sendKeys(file.getPath());
-        }
+        WebElement uploadFileElement = findByXPath("//*[@id=\"uploadifive-file_upload\"]/input[2]");
+        uploadFiles(cleanTransactionsFolder, uploadFileElement);
     }
 
     private void openImportModal() {

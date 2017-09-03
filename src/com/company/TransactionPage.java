@@ -37,4 +37,8 @@ public class TransactionPage extends PageAction {
     private void selectDuration() {
         selectByValue("90", "//*[@id=\"_ctl0_ContentButtonsRight_ddlExportPeriod\"]");
     }
+
+    public void logOut() {
+        findById("_ctl0_btnLogout").click();
+    }
 }
